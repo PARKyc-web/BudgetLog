@@ -1,4 +1,4 @@
-package com.budgetlog.budgetlog;
+package com.budgetlog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
