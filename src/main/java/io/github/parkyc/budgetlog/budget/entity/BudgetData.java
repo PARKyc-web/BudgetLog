@@ -7,8 +7,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,25 +19,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "budget")
-public class Budget {
+@Table(name = "budget_data")
+public class BudgetData {
     
     @Id
+    @Column(name = "data_seq")
+    private Long dataSeq;
+
     @Column(name = "budget_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long budgetId;
+    
+    @Column(name = "amount")   
+    private Long amount;
 
-    @Column(name = "budget_name", length = 1024)
-    private String budgetName;
+    @Column(name = "quantity")
+    private Long quantity;
+    
+    @Column(name = "total")
+    private Long total;
 
-    @Column(name = "budget_type", length = 128)
-    private String budgetType;
+    @Column(name = "memo")
+    private String memo;
 
-    @Column(name = "description", columnDefinition = "CLOB")
-    private String description;
+    @Column(name = "regist_id")
+    private String registId;
 
-    @Column(name = "owner")
-    private String owner;
+    @Column(name = "update_id")
+    private String updateId;
 
     @CreatedDate
     @Column(name = "create_dt")
@@ -47,6 +53,6 @@ public class Budget {
     
     @LastModifiedDate
     @Column(name = "update_dt")
-    private LocalDateTime updateDt;
-    
+    private LocalDateTime updateDt; 
+
 }
