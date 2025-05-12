@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +26,7 @@ public class BudgetContoller {
         return ResponseEntity.ok(budgetService.findAll());
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search/list")
     public ResponseEntity<List<Budget>> getBudgets(BudgetSearchDTO budgetSearchDTO) {
         return ResponseEntity.ok(budgetService.findByBudgetName(budgetSearchDTO.getBudgetName()));
     }
