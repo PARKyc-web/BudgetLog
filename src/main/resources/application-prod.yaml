@@ -2,5 +2,5 @@ spring:
   sql:
     init:
       mode: never
-      schema-locations: classpath:/database/schema.sql
+      schema-locations:
       data-locations:

@@ -25,15 +25,12 @@ import lombok.NoArgsConstructor;
 public class Budget {
     
     @Id
-    @Column(name = "budget_id")
+    @Column(name = "budget_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long budgetId;
+    private Long budgetSeq;
 
-    @Column(name = "budget_name", length = 1024)
+    @Column(name = "budget_name", length = 255)
     private String budgetName;
-
-    @Column(name = "budget_type", length = 128)
-    private String budgetType;
 
     @Column(name = "description", columnDefinition = "CLOB")
     private String description;
@@ -48,5 +45,8 @@ public class Budget {
     @LastModifiedDate
     @Column(name = "update_dt")
     private LocalDateTime updateDt;
+
+    @Column(name = "is_public")
+    private String isPublic;
     
 }

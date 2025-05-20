@@ -26,10 +26,13 @@ public class BudgetData {
     @Column(name = "data_seq")
     private Long dataSeq;
 
-    @Column(name = "budget_id")
-    private Long budgetId;
+    @Column(name = "budget_seq")
+    private Long budgetSeq;
+
+    @Column(name = "category_seq")
+    private Long categorySeq;
     
-    @Column(name = "amount")   
+    @Column(name = "amount")
     private Long amount;
 
     @Column(name = "quantity")
@@ -38,11 +41,17 @@ public class BudgetData {
     @Column(name = "total")
     private Long total;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "memo")
     private String memo;
 
-    @Column(name = "regist_id")
-    private String registId;
+    @Column(name = "use_dt")
+    private LocalDateTime useDt;
+
+    @Column(name = "create_id")
+    private String createId;
 
     @Column(name = "update_id")
     private String updateId;
