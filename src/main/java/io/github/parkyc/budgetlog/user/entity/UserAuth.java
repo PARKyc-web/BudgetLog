@@ -9,10 +9,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="user_auth")
 public class UserAuth {
+    // 검토완료
 
     @Id
+    @Column(name="user_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long seq;
+    private Long userSeq;
 
     @Column(name="email", nullable = false, unique = true, length = 1024)
     private String email;
@@ -33,5 +35,11 @@ public class UserAuth {
     @LastModifiedDate
     @Column(name="update_dt")
     private LocalDateTime updateDt;
+
+    @OneToOne(mappedBy = "userAuth",
+              cascade = CascadeType.ALL,
+              fetch = FetchType.LAZY,
+              optional = false)
+    private UserInfo userInfo;
 
 }
