@@ -24,9 +24,4 @@ public class UserInfo {
     @Column(name="update_dt")
     private LocalDateTime updateDt;
 
-    /* 테이블 관계 */
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="user_seq")
-    private UserAuth userAuth;
 }

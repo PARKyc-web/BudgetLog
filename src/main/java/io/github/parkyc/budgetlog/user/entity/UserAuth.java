@@ -16,10 +16,10 @@ public class UserAuth {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSeq;
 
-    @Column(name="email", nullable = false, unique = true, length = 1024)
+    @Column(name="email", nullable = false, unique = true)
     private String email;
 
-    @Column(name="password", nullable = false, length = 1024)
+    @Column(name="password", nullable = false)
     private String password;
 
     @Column(name="status", nullable = false)
@@ -35,11 +35,5 @@ public class UserAuth {
     @LastModifiedDate
     @Column(name="update_dt")
     private LocalDateTime updateDt;
-
-    @OneToOne(mappedBy = "userAuth",
-              cascade = CascadeType.ALL,
-              fetch = FetchType.LAZY,
-              optional = false)
-    private UserInfo userInfo;
 
 }

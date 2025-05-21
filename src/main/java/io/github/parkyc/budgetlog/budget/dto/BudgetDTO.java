@@ -11,12 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BudgetDTO {
 
-    private Long budgetId;
+  private Long budgetSeq;
 
-    private String budgetName;
+  private String budgetName;
 
-    private String budgetType;
+  private String description;
 
-    private String owner;
+  private Long owner;
 
+  private String createDt;
+
+  private String updateDt;
 }

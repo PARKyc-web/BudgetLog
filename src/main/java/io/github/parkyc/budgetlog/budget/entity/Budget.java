@@ -23,30 +23,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "budget")
 public class Budget {
-    
+    // 검토완료
+
     @Id
-    @Column(name = "budget_seq")
+    @Column(name="budget_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long budgetSeq;
 
-    @Column(name = "budget_name", length = 255)
+    @Column(name="budget_name")
     private String budgetName;
 
-    @Column(name = "description", columnDefinition = "CLOB")
+    @Column(name="description")
     private String description;
 
-    @Column(name = "owner")
-    private String owner;
+    @Column(name="owner") // user_seq
+    private int owner;
 
-    @CreatedDate
-    @Column(name = "create_dt")
+    @Column(name="create_dt")
     private LocalDateTime createDt;
-    
-    @LastModifiedDate
-    @Column(name = "update_dt")
+
+    @Column(name="update_dt")
     private LocalDateTime updateDt;
 
-    @Column(name = "is_public")
-    private String isPublic;
     
 }

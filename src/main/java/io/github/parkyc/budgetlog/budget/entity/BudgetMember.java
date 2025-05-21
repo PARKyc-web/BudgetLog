@@ -20,23 +20,22 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "budget_member")
 public class BudgetMember {
-    
+
     @Id
-    @Column(name = "member_seq")
-    private Long memberSeq;
+    @Column(name = "budget_member_seq")
+    private Long budgetMemberSeq;
 
-    @Column(name = "budget_id")
-    private Long budgetId;
+    @Column(name = "budget_seq")
+    private Long budgetSeq;
 
-    @Column(name = "member_id")
-    private String memberId;
+    @Column(name = "user_seq")
+    private Long userSeq;
 
-    @Column(name = "member_type")
-    private String memberType;
+    @Column(name = "budget_role")
+    private String budgetRole;
 
-    @CreatedDate
-    @Column(name = "join_dt")
-    private LocalDateTime joinDt;
+    @Column(name = "joined_dt")
+    private LocalDateTime joinedDt;
 
     @Column(name = "status")
     private String status;

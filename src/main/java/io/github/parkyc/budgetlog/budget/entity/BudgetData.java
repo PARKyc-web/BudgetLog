@@ -21,47 +21,52 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "budget_data")
 public class BudgetData {
-    
+    // 검토완료
+
     @Id
-    @Column(name = "data_seq")
+    @Column(name="data_seq")
     private Long dataSeq;
 
-    @Column(name = "budget_seq")
+    @Column(name="budget_seq")
     private Long budgetSeq;
 
-    @Column(name = "category_seq")
+    @Column(name="category_seq")
     private Long categorySeq;
-    
-    @Column(name = "amount")
+
+    @Column(name="amount")
     private Long amount;
 
-    @Column(name = "quantity")
+    @Column(name="quantity")
     private Long quantity;
-    
-    @Column(name = "total")
-    private Long total;
 
-    @Column(name = "type")
+    @Column(name="type")
     private String type;
 
-    @Column(name = "memo")
+    @Column(name="memo")
     private String memo;
 
-    @Column(name = "use_dt")
-    private LocalDateTime useDt;
+    @Column(name="create_id")
+    private Long createId;
 
-    @Column(name = "create_id")
-    private String createId;
-
-    @Column(name = "update_id")
-    private String updateId;
+    @Column(name="update_id")
+    private Long updateId;
 
     @CreatedDate
-    @Column(name = "create_dt")
+    @Column(name="create_dt")
     private LocalDateTime createDt;
-    
+
     @LastModifiedDate
-    @Column(name = "update_dt")
-    private LocalDateTime updateDt; 
+    @Column(name="update_dt")
+    private LocalDateTime updateDt;
+
+
+
+
+
+
+
+
+
+
 
 }
