@@ -3,37 +3,38 @@ package io.github.parkyc.budgetlog.budget.controller;
 import io.github.parkyc.budgetlog.budget.dto.BudgetDTO;
 import io.github.parkyc.budgetlog.budget.service.BudgetService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/budget")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class BudgetContoller {
 
-  private final BudgetService budgetService;
+    private final BudgetService budgetService;
 
-  @GetMapping("/create")
-  public BudgetDTO createBudget(){
+    @GetMapping("/budget")
+    public List<BudgetDTO> getMyBudgetList(){
 
-    return new BudgetDTO().builder().budgetName("test").build();
-  }
+        System.out.println("## Run getMyBudgetList");
+        List<BudgetDTO> budgetList = budgetService.findAll();
 
-  @GetMapping("/list")
-  public List<BudgetDTO> getMyBudgetList(){
-
-    List<BudgetDTO> budgetList = new ArrayList<>();
-    for(int i = 0; i < 10; i++){
-      BudgetDTO dto = BudgetDTO.builder().budgetSeq(Long.valueOf(i)).budgetName("Sample Budget "+i).build();
-
-      budgetList.add(dto);
+        return budgetList;
     }
-    return budgetList;
-  }
+
+    @PostMapping("/budget")
+    public BudgetDTO createBudget(@RequestBody BudgetDTO budgetDTO){
+
+        return budgetService.createBudget(budgetDTO);
+    }
+
+    @PutMapping("/budget")
+    public BudgetDTO updateBudget(@RequestBody BudgetDTO budgetDTO){
+
+        return budgetDTO;
+    }
 
 }

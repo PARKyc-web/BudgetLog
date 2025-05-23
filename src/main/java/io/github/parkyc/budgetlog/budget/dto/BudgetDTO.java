@@ -1,9 +1,12 @@
 package io.github.parkyc.budgetlog.budget.dto;
 
+import io.github.parkyc.budgetlog.budget.entity.Budget;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,7 +22,18 @@ public class BudgetDTO {
 
   private Long owner;
 
-  private String createDt;
+  private LocalDateTime createDt;
 
-  private String updateDt;
+  private LocalDateTime updateDt;
+
+  public static BudgetDTO entityToDTO(Budget budget){
+    BudgetDTO dto = new BudgetDTO();
+
+    dto.setBudgetSeq(budget.getBudgetSeq());
+    dto.setOwner(budget.getOwner());
+    dto.setDescription(budget.getDescription());
+    dto.setBudgetName(budget.getBudgetName());
+
+    return dto;
+  }
 }

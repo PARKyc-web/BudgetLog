@@ -2,25 +2,22 @@ package io.github.parkyc.budgetlog.budget.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "budget")
 public class Budget {
     // 검토완료
@@ -37,11 +34,13 @@ public class Budget {
     private String description;
 
     @Column(name="owner") // user_seq
-    private int owner;
+    private Long owner;
 
+    @CreatedDate
     @Column(name="create_dt")
     private LocalDateTime createDt;
 
+    @LastModifiedDate
     @Column(name="update_dt")
     private LocalDateTime updateDt;
 
