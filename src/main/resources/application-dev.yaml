@@ -13,3 +13,7 @@ spring:
       hibernate:
         formatSql: true
         dialect: org.hibernate.dialect.MariaDBDialect
+
+jwt:
+  token: budget-log
+  expire-time: 3600

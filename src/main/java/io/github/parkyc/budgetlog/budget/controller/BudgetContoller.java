@@ -19,7 +19,6 @@ public class BudgetContoller {
     @GetMapping("/budget")
     public List<BudgetDTO> getMyBudgetList(){
 
-        System.out.println("## Run getMyBudgetList");
         List<BudgetDTO> budgetList = budgetService.findAll();
 
         return budgetList;

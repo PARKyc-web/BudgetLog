@@ -1,5 +1,6 @@
 package io.github.parkyc.budgetlog.user.dto;
 
+import io.github.parkyc.budgetlog.user.entity.UserAuth;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserAuthDTO {
 
-    private Long id;
+    private Long seq;
 
-    private String userId;
+    private String email;
 
     private String password;
 
