@@ -17,6 +17,15 @@ public class UserDTO {
     private String password;
     private String userName;
 
+    public static User toEntity(UserDTO userDTO) {
+        return User.builder()
+                .userSeq(userDTO.getUserSeq())
+                .userId(userDTO.getUserId())
+                .password(userDTO.getPassword())
+                .userName(userDTO.getUserName())
+                .build();
+    }
+
     public static UserDTO toDTO(User user){
         return UserDTO.builder()
                 .userSeq(user.getUserSeq())
