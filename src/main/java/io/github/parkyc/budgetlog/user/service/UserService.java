@@ -4,7 +4,7 @@ import io.github.parkyc.budgetlog.user.dto.UserDTO;
 
 public interface UserService {
 
-    UserDTO makeTempUser();
+    // UserDTO makeTempUser();
 
     UserDTO createUser(UserDTO userDTO);
 

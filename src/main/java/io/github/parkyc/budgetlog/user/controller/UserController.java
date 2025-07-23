@@ -2,8 +2,6 @@ package io.github.parkyc.budgetlog.user.controller;
 
 import io.github.parkyc.budgetlog.common.CommonDTO;
 import io.github.parkyc.budgetlog.user.dto.UserDTO;
-import io.github.parkyc.budgetlog.user.entity.User;
-import io.github.parkyc.budgetlog.user.repository.UserRepositry;
 import io.github.parkyc.budgetlog.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +22,14 @@ public class UserController {
     }
 
     /*
-       H2 DB를 사용할 때, 계정을 생성하기 위함.
+       임시 계정을 발급하기 위한 Method
     */
     @GetMapping("/temp")
     public CommonDTO.Response<UserDTO> makeTempUser() {
+        /*
         UserDTO user = userService.makeTempUser();
-
-        return CommonDTO.Response.success(user);
+        */
+        return CommonDTO.Response.success(null);
     }
     @PostMapping("/create")
     public CommonDTO.Response<UserDTO> createUser(@RequestBody UserDTO user) {

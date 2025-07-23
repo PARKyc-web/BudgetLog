@@ -3,7 +3,7 @@ spring:
     name: budgetlog
 
   profiles:
-    active: dev
+    active: maria
 
 server:
   port: 8888

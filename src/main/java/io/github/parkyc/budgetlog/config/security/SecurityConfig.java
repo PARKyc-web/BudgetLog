@@ -23,14 +23,11 @@ public class SecurityConfig {
         http
                 // CSRF 보호 비활성화
                 .csrf(csrf -> csrf.disable())
-
                 // 세션 관리 정책을 STATELESS로 설정 (토큰 기반 인증)
                 // .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
                 // HTTP 기본 인증 및 폼 로그인 비활성화
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .formLogin(formLogin -> formLogin.disable())
-
                 // 요청별 권한 설정
                 .authorizeHttpRequests(auth -> auth
                         // 특정 경로 (예: 로그인, 회원가입)는 모두에게 허용

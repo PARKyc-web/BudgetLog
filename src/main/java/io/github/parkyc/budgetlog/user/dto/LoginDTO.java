@@ -9,11 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-
-    private Long userSeq;
+public class LoginDTO {
     private String userId;
     private String password;
-    private String userName;
-
 }
