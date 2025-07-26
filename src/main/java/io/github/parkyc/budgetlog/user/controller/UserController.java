@@ -21,22 +21,13 @@ public class UserController {
         return ResponseEntity.ok("ok");
     }
 
-    /*
-       임시 계정을 발급하기 위한 Method
-    */
-    @GetMapping("/temp")
-    public CommonDTO.Response<UserDTO> makeTempUser() {
-        /*
-        UserDTO user = userService.makeTempUser();
-        */
-        return CommonDTO.Response.success(null);
-    }
-    @PostMapping("/create")
-    public CommonDTO.Response<UserDTO> createUser(@RequestBody UserDTO user) {
-        UserDTO result = userService.createUser(user);
 
-        return CommonDTO.Response.success(result);
+    @GetMapping("/dd")
+    public CommonDTO.Response<?> test(){
+        return CommonDTO.Response.success("ok");
     }
+
+
 
 
 }

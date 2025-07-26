@@ -25,8 +25,11 @@ public class UserBase {
     @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name = "user_name", nullable = false, length = 100)
+    @Column(name="user_name", nullable = false, length = 100)
     private String userName;
+
+    @Column(name="auth_yn", nullable = false, length = 1)
+    private String authYn;
 
     @OneToOne(mappedBy = "userBase", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserInfo userInfo;

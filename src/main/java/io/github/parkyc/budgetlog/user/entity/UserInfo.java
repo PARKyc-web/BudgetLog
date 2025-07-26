@@ -24,9 +24,6 @@ public class UserInfo {
     @JoinColumn(name = "user_seq")
     private UserBase userBase;
 
-    @Column(name = "email", nullable = false, unique = true, length = 100)
-    private String email;
-    
     // 추가적인 정보 ( 선택적인 정보 )
 
     @CreationTimestamp
@@ -41,7 +38,6 @@ public class UserInfo {
         UserInfo userInfo = UserInfo.builder()
                 .userSeq(userBase.getUserSeq())
                 .userBase(userBase)
-                .email(email)
                 .build();
         userBase.setUserInfo(userInfo);
         return userInfo;

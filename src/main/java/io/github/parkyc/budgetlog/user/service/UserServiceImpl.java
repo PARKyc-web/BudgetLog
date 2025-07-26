@@ -12,14 +12,4 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepositry userRepositry;
 
-
-    @Override
-    public UserDTO createUser(UserDTO userDTO) {
-
-        UserInfo user = UserDTO.toEntity(userDTO);
-        userRepositry.saveAndFlush(user);
-
-        return UserDTO.toDTO(user);
-    }
-
 }
