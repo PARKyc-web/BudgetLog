@@ -1,11 +1,10 @@
 package io.github.parkyc.budgetlog.user.service;
 
-import io.github.parkyc.budgetlog.user.dto.SignUpDTO;
-import io.github.parkyc.budgetlog.user.dto.UserDTO;
+import io.github.parkyc.budgetlog.user.dto.SignUpRequestDTO;
+import io.github.parkyc.budgetlog.user.dto.SignUpResponseDTO;
 import io.github.parkyc.budgetlog.user.entity.UserAuth;
-import io.github.parkyc.budgetlog.user.entity.UserInfo;
 import io.github.parkyc.budgetlog.user.repository.UserAuthRepository;
-import io.github.parkyc.budgetlog.user.repository.UserRepositry;
+import io.github.parkyc.budgetlog.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +15,38 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepositry userRepositry;
+    private final UserRepository userRepository;
 
     private final UserAuthRepository authRepository;
 
     @Override
-    public SignUpDTO createAuthCode(SignUpDTO signupDTO) {
+    public boolean isAvailableId(SignUpRequestDTO signUpRequestDTO) {
+        return !userRepository.existsByUserId(signUpRequestDTO.getUserId());
+    }
+
+    @Override
+    public SignUpResponseDTO createAuthCode(SignUpRequestDTO requestDTO) {
 
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());
         String authCode = "";
-        for(int i=0; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             authCode += rand.nextInt();
         }
 
         UserAuth userAuth = UserAuth.builder()
-                .userId(signupDTO.getUserId())
+                .userId(requestDTO.getUserId())
                 .code(authCode)
                 .expireTime(LocalDateTime.now().plusMinutes(10))
                 .build();
 
         authRepository.saveAndFlush(userAuth);
 
-        return signupDTO;
+        SignUpResponseDTO result = SignUpResponseDTO.builder()
+                .userId(requestDTO.getUserId())
+                .message("success")
+                .build();
+
+        return result;
     }
 }

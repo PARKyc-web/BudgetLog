@@ -1,8 +1,8 @@
 package io.github.parkyc.budgetlog.user.controller;
 
 import io.github.parkyc.budgetlog.common.CommonDTO;
-import io.github.parkyc.budgetlog.user.dto.SignUpDTO;
-import io.github.parkyc.budgetlog.user.dto.UserDTO;
+import io.github.parkyc.budgetlog.user.dto.SignUpRequestDTO;
+import io.github.parkyc.budgetlog.user.dto.SignUpResponseDTO;
 import io.github.parkyc.budgetlog.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,19 +24,28 @@ public class UserController {
 
 
     /*
-        회원가입 버튼 클릭 > 이메일 입력 > 이메일 인증(코드입력) > 비밀번호 및 다른 내용 입력
+        회원가입 버튼 클릭 >
      */
     @PostMapping("/sign-up")
-    public CommonDTO.Response<?> signUp(@RequestBody SignUpDTO signUpDTO) {
+    public CommonDTO.Response<?> signUp(@RequestBody SignUpRequestDTO signUpRequestDTO) {
+        
+        /* 아이디 중복 확인을 먼저 해야지 */
+        boolean isDup = userService.isAvailableId(signUpRequestDTO);
+        SignUpResponseDTO response = SignUpResponseDTO.builder()
+                .userId(signUpRequestDTO.getUserId())
+                .message("Request Id is already in use")
+                .build();
 
-        return CommonDTO.Response.success("ok");
+        if(isDup){
+            response = userService.createAuthCode(signUpRequestDTO);
+        }
+
+        return CommonDTO.Response.success(response);
     }
 
     @PostMapping("/sign-up/confirm")
-    public CommonDTO.Response<?> signUpConfirm(@RequestBody SignUpDTO signUpDTO) {
+    public CommonDTO.Response<?> signUpConfirm(@RequestBody SignUpRequestDTO signUpRequestDTO) {
 
-        // 인증 회원의 Code 값을 받는다.
-        //
 
         return CommonDTO.Response.success("ok");
     }

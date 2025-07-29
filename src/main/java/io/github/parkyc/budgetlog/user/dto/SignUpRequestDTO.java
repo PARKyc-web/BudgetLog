@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUpDTO {
+public class SignUpRequestDTO {
 
     /* 이메일을 아이디로 사용함.
      * ex) naver-test@naver.com
@@ -19,7 +19,7 @@ public class SignUpDTO {
     private String password;
 
     private String userName;
-    
+
     // signUp/confirm 에서 사용할 코드 > 이메일 인증코드
     private String code;
 }

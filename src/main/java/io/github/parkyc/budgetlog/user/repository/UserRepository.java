@@ -1,7 +1,10 @@
 package io.github.parkyc.budgetlog.user.repository;
 
+import io.github.parkyc.budgetlog.user.entity.UserBase;
 import io.github.parkyc.budgetlog.user.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepositry extends JpaRepository<UserInfo, Long> {
+public interface UserRepository extends JpaRepository<UserInfo, Long> {
+
+    boolean existsByUserId(String userId);
 }
