@@ -32,10 +32,10 @@ dependencies {
 
 	// DB	
 	// application-maria 사용시 사용
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	// runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	
 	// application-h2 사용시 사용
-	// runtimeOnly 'com.h2database:h2'
+    // runtimeOnly 'com.h2database:h2'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
@@ -44,7 +44,8 @@ dependencies {
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    runtimeOnly 'org.postgresql:postgresql'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 }
 

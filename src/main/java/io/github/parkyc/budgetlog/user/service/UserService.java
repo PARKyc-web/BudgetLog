@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UserService {
 
-    boolean isAvailableId(@RequestBody SignUpRequestDTO signUpRequestDTO);
-
-    SignUpResponseDTO createAuthCode(SignUpRequestDTO signUpRequestDTO);
-
 
 
 
