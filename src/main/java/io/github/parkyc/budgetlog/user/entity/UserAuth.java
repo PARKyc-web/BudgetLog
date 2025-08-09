@@ -17,11 +17,13 @@ import java.time.LocalDateTime;
         table="BUDGET_LOG_SEQUENCE",
         pkColumnName="sequence_name",
         valueColumnName = "next_val",
+        pkColumnValue = "USER_AUTH_SEQUENCE",
         allocationSize=1 // 한번에 몇개의 Sequence를 증가시킬것인가?, 몇개를 메모리에 가지고 있을것인가?
 )
 public class UserAuth {
 
     @Id
+    @Column(name="auth_seq")
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "USER_AUTH_SEQ_GENERATOR")
     private Long authSeq;
 
