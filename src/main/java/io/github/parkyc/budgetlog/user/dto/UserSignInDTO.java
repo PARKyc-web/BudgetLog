@@ -22,7 +22,6 @@ public class UserSignInDTO {
     @NotBlank(message = "{UserNameNotBlink}")
     private String userName;
 
-
     public UserBase toEntity() {
         return UserBase.builder()
                 .userId(userId)
