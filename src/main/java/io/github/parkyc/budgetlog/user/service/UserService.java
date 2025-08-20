@@ -22,6 +22,14 @@ public interface UserService {
     TokenDTO login(LoginDTO loginDTO);
 
     /**
+     * verifyToken
+     * 토큰 검증 메소드
+     * @param token
+     * @return
+     */
+    boolean verifyToken(String token);
+
+    /**
      * renewAccess
      * 리프레쉬 토큰을 기반으로 엑세스 토큰을 갱신한다.
      * @param tokenDTO

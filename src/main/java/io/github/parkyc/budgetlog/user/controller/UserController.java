@@ -3,6 +3,7 @@ package io.github.parkyc.budgetlog.user.controller;
 import io.github.parkyc.budgetlog.common.CommonDTO;
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
+import io.github.parkyc.budgetlog.user.dto.TokenDTO;
 import io.github.parkyc.budgetlog.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public CommonDTO.Response<?> login(@RequestBody @Valid LoginDTO loginDTO){
+    public CommonDTO.Response<?> login(@RequestBody LoginDTO loginDTO){
+        TokenDTO token = userService.login(loginDTO);
+        return CommonDTO.Response.success(token);
+    }
 
-        return CommonDTO.Response.success("ok");
+    @PostMapping("/verify")
+    public CommonDTO.Response<?> verifyToken(@RequestBody TokenDTO tokenDTO){
+        boolean result = userService.verifyToken(tokenDTO.getAccessToken());
+
+        return CommonDTO.Response.success(result);
     }
 
 

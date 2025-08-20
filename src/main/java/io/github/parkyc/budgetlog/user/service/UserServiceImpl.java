@@ -7,8 +7,9 @@ import io.github.parkyc.budgetlog.user.entity.UserBase;
 import io.github.parkyc.budgetlog.user.mapper.UserMapper;
 import io.github.parkyc.budgetlog.user.repository.UserAuthRepository;
 import io.github.parkyc.budgetlog.user.repository.UserBaseRepository;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SecurityException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private String key = "budget-log-secret-key-2025-05-27";
     private final SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes());
     private final Long expireRefresh = 36000000L;
-    private final Long expireAccess = 18000L;
+    private final Long expireAccess = 1800000L;
     private final String issuer = "budgetlog";
 
 
@@ -87,6 +88,30 @@ public class UserServiceImpl implements UserService {
                 .accessToken(access)
                 .refreshToken(refresh)
                 .build();
+    }
+
+    @Override
+    public boolean verifyToken(String token) {
+        try{
+            Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
+            System.out.println(claims.getSubject());
+            System.out.println(claims.getIssuer());
+            System.out.println(claims.getIssuedAt());
+            System.out.println(claims.getExpiration());
+            return true;
+        } catch (SecurityException | MalformedJwtException e){
+            System.out.println("Invalid token");
+        } catch (ExpiredJwtException e){
+            System.out.println("Expired token");
+        } catch (UnsupportedJwtException e){
+            System.out.println("Unsupported token");
+        } catch (IllegalArgumentException e){
+            System.out.println("Invalid Argument token");
+        } catch (Exception e){
+            System.out.println("Unknown Exception");
+        }
+
+        return false;
     }
 
     @Override

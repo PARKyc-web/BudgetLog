@@ -25,10 +25,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(formLogin -> formLogin
-                        .loginProcessingUrl("/api/user/login")
-                        .permitAll()
-                )
                 .logout(logout -> logout
                         .logoutUrl("/api/user/logout")
                 );
