@@ -1,18 +1,17 @@
-package io.github.parkyc.budgetlog.user.dto;
+package io.github.parkyc.budgetlog.token.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TokenDTO {
+public class JwtTokenDTO {
 
+    private boolean valid;
     private String accessToken;
     private String refreshToken;
 }

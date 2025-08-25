@@ -2,7 +2,7 @@ package io.github.parkyc.budgetlog.user.service;
 
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
-import io.github.parkyc.budgetlog.user.dto.TokenDTO;
+import io.github.parkyc.budgetlog.token.dto.JwtTokenDTO;
 import io.github.parkyc.budgetlog.user.entity.UserBase;
 import io.github.parkyc.budgetlog.user.mapper.UserMapper;
 import io.github.parkyc.budgetlog.user.repository.UserAuthRepository;
@@ -11,11 +11,9 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -54,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TokenDTO login(LoginDTO loginDTO) {
+    public JwtTokenDTO login(LoginDTO loginDTO) {
 
         UserBase base = userBaseRepository.findByUserId(loginDTO.getUserId());
         if(base == null){
@@ -84,7 +82,7 @@ public class UserServiceImpl implements UserService {
                 .signWith(secretKey)
                 .compact();
 
-        return TokenDTO.builder()
+        return JwtTokenDTO.builder()
                 .accessToken(access)
                 .refreshToken(refresh)
                 .build();
@@ -115,7 +113,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TokenDTO renewAccess(TokenDTO tokenDTO) {
+    public JwtTokenDTO renewAccess(JwtTokenDTO tokenDTO) {
         return null;
     }
 }

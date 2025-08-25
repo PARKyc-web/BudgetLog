@@ -2,7 +2,7 @@ package io.github.parkyc.budgetlog.user.service;
 
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
-import io.github.parkyc.budgetlog.user.dto.TokenDTO;
+import io.github.parkyc.budgetlog.token.dto.JwtTokenDTO;
 
 public interface UserService {
 
@@ -19,7 +19,7 @@ public interface UserService {
      * @param loginDTO
      * @return
      */
-    TokenDTO login(LoginDTO loginDTO);
+    JwtTokenDTO login(LoginDTO loginDTO);
 
     /**
      * verifyToken
@@ -35,6 +35,6 @@ public interface UserService {
      * @param tokenDTO
      * @return
      */
-    TokenDTO renewAccess(TokenDTO tokenDTO);
+    JwtTokenDTO renewAccess(JwtTokenDTO tokenDTO);
 
 }
