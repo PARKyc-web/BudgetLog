@@ -1,8 +1,8 @@
 package io.github.parkyc.budgetlog.token.controller;
 
 import io.github.parkyc.budgetlog.common.CommonDTO;
-import io.github.parkyc.budgetlog.token.dto.JwtTokenDTO;
-import io.github.parkyc.budgetlog.token.service.JwtTokenService;
+import io.github.parkyc.budgetlog.token.dto.JwtDTO;
+import io.github.parkyc.budgetlog.token.service.JwtService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/token")
 @RequiredArgsConstructor
-public class JwtTokenController {
+public class JwtController {
 
-    private final JwtTokenService tokenService;
+    private final JwtService tokenService;
 
     @PostMapping("/verify")
-    public CommonDTO.Response<?> verifyToken(@RequestBody JwtTokenDTO tokenDTO){
+    public CommonDTO.Response<?> verifyToken(@RequestBody JwtDTO tokenDTO){
 
         Claims claims = tokenService.verifyToken(tokenDTO.getAccessToken());
 

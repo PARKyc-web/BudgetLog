@@ -3,7 +3,7 @@ package io.github.parkyc.budgetlog.user.controller;
 import io.github.parkyc.budgetlog.common.CommonDTO;
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
-import io.github.parkyc.budgetlog.token.dto.JwtTokenDTO;
+import io.github.parkyc.budgetlog.token.dto.JwtDTO;
 import io.github.parkyc.budgetlog.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/login")
     public CommonDTO.Response<?> login(@RequestBody LoginDTO loginDTO){
-        JwtTokenDTO token = userService.login(loginDTO);
+        JwtDTO token = userService.login(loginDTO);
         return CommonDTO.Response.success(token);
     }
 

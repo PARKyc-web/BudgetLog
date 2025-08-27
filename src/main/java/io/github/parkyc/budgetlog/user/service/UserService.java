@@ -2,7 +2,7 @@ package io.github.parkyc.budgetlog.user.service;
 
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
-import io.github.parkyc.budgetlog.token.dto.JwtTokenDTO;
+import io.github.parkyc.budgetlog.token.dto.JwtDTO;
 
 public interface UserService {
 
@@ -19,22 +19,5 @@ public interface UserService {
      * @param loginDTO
      * @return
      */
-    JwtTokenDTO login(LoginDTO loginDTO);
-
-    /**
-     * verifyToken
-     * 토큰 검증 메소드
-     * @param token
-     * @return
-     */
-    boolean verifyToken(String token);
-
-    /**
-     * renewAccess
-     * 리프레쉬 토큰을 기반으로 엑세스 토큰을 갱신한다.
-     * @param tokenDTO
-     * @return
-     */
-    JwtTokenDTO renewAccess(JwtTokenDTO tokenDTO);
-
+    JwtDTO login(LoginDTO loginDTO);
 }

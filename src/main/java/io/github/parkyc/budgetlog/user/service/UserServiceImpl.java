@@ -1,8 +1,10 @@
 package io.github.parkyc.budgetlog.user.service;
 
+import io.github.parkyc.budgetlog.token.service.JwtService;
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
-import io.github.parkyc.budgetlog.token.dto.JwtTokenDTO;
+import io.github.parkyc.budgetlog.token.dto.JwtDTO;
+import io.github.parkyc.budgetlog.user.dto.UserBaseDTO;
 import io.github.parkyc.budgetlog.user.entity.UserBase;
 import io.github.parkyc.budgetlog.user.mapper.UserMapper;
 import io.github.parkyc.budgetlog.user.repository.UserAuthRepository;
@@ -25,14 +27,9 @@ public class UserServiceImpl implements UserService {
     private final UserAuthRepository userAuthRepository;
     private final UserBaseRepository userBaseRepository;
 
-    private final UserMapper userMapper;
+    private final JwtService jwtService;
 
-    /** Variable **/
-    private String key = "budget-log-secret-key-2025-05-27";
-    private final SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes());
-    private final Long expireRefresh = 36000000L;
-    private final Long expireAccess = 1800000L;
-    private final String issuer = "budgetlog";
+    private final UserMapper userMapper;
 
 
     /** Method **/
@@ -44,6 +41,7 @@ public class UserServiceImpl implements UserService {
                 .userId(guestId)
                 .password(guestId)
                 .userName("게스트 계정")
+                .userRole("GUEST")
                 .build();
 
         userBaseRepository.saveAndFlush(guest);
@@ -52,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JwtTokenDTO login(LoginDTO loginDTO) {
+    public JwtDTO login(LoginDTO loginDTO) {
 
         UserBase base = userBaseRepository.findByUserId(loginDTO.getUserId());
         if(base == null){
@@ -64,56 +62,8 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        Date now = new Date();
+        UserBaseDTO dto = userMapper.toUserBaseDTO(base);
 
-        String access = Jwts.builder()
-                .subject(loginDTO.getUserId())
-                .issuer(issuer)
-                .issuedAt(now)
-                .expiration(new Date(now.getTime() + expireAccess))
-                .signWith(secretKey)
-                .compact();
-
-        String refresh = Jwts.builder()
-                .subject(loginDTO.getUserId())
-                .issuer(issuer)
-                .issuedAt(now)
-                .expiration(new Date(now.getTime() + expireRefresh))
-                .signWith(secretKey)
-                .compact();
-
-        return JwtTokenDTO.builder()
-                .accessToken(access)
-                .refreshToken(refresh)
-                .build();
-    }
-
-    @Override
-    public boolean verifyToken(String token) {
-        try{
-            Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
-            System.out.println(claims.getSubject());
-            System.out.println(claims.getIssuer());
-            System.out.println(claims.getIssuedAt());
-            System.out.println(claims.getExpiration());
-            return true;
-        } catch (SecurityException | MalformedJwtException e){
-            System.out.println("Invalid token");
-        } catch (ExpiredJwtException e){
-            System.out.println("Expired token");
-        } catch (UnsupportedJwtException e){
-            System.out.println("Unsupported token");
-        } catch (IllegalArgumentException e){
-            System.out.println("Invalid Argument token");
-        } catch (Exception e){
-            System.out.println("Unknown Exception");
-        }
-
-        return false;
-    }
-
-    @Override
-    public JwtTokenDTO renewAccess(JwtTokenDTO tokenDTO) {
-        return null;
+        return jwtService.createToken(dto);
     }
 }

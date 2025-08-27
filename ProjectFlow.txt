@@ -29,3 +29,5 @@ jwt 발급도 현재 제대로 안됨.
 UserController에서 Token 관련 메서드 부분을 분리
 리프레쉬 토큰을 모든 요청마다 받는건 너무 위험함.
 @ConfigurationProperties 추가해서 프로퍼티를 가져와서 사용하려고 함.
+
+# 8/26 (작업시간 : 3시간)

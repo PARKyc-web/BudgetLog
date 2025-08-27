@@ -1,4 +1,4 @@
-package io.github.parkyc.budgetlog.properties;
+package io.github.parkyc.budgetlog.config.properties;
 
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;

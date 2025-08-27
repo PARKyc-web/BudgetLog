@@ -36,6 +36,9 @@ public class UserBase {
     @Column(name="user_name", nullable = false, length = 100)
     private String userName;
 
+    @Column(name="user_role")
+    private String userRole;
+
 //    애초에 인증이 완료된 부분만 이 테이블에 넣으면 되잖아?? >> 근데 만약에 회원가입하다가 중간에 그만두면?? >> 회원가입이 실패한거지
 //    만약에 이메일 인증단계에서 안했어... 그럼? >> 다시 만들어
 //    @Column(name="auth_yn", nullable = false, length = 1)
