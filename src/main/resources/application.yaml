@@ -3,7 +3,7 @@ spring:
     name: budgetlog
 
   profiles:
-    active: supa
+    active: dev
   messages:
     basename: messages
     encoding: UTF-8

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,19 +21,20 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
 
     private static final String[] ALLOWED_PATH = {
             "/api/user/**",
             "/api/token/**",
             "/favicon.ico",
             "/swagger-ui/**",
+            "/h2-console/**",
     };
 
     @Override
@@ -49,33 +51,34 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
+        JwtStatus isValid = null;
         try {
             // header 정보 가져옴
             String header = request.getHeader("Authorization");
 
             // JWT token 유무 확인
-            if (header != null || header.startsWith("Bearer ")){
+            if (header != null && header.startsWith("Bearer ")){
                 String token = header.substring(7);
 
-                JwtStatus isValid = jwtService.isValid(token);
+                isValid = jwtService.isValid(token);
                 if(isValid == JwtStatus.VALID){
                     Claims clm = jwtService.verifyToken(token);
                     String userId = clm.get("userId", String.class);
+                    // String role = clm.get("role", String.class);
 
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
-                    UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    Authentication authToken =
+                            new UsernamePasswordAuthenticationToken(userId, null, Collections.emptyList());
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
 
         } catch (ExpiredJwtException e){
-
+            isValid = JwtStatus.EXPIRED;
         } catch (JwtException e){
-
+            isValid = JwtStatus.INVALID;
         } catch (Exception e){
-
+            isValid = JwtStatus.INVALID;
         }
 
         filterChain.doFilter(request, response);
