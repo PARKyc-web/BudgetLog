@@ -31,7 +31,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private static final String[] ALLOWED_PATH = {
             "/api/user/**",
-            "/api/token/**",
             "/favicon.ico",
             "/swagger-ui/**",
             "/h2-console/**",
@@ -51,11 +50,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
+        System.out.println("Jwt filter ON");
         JwtStatus isValid = null;
         try {
             // header 정보 가져옴
             String header = request.getHeader("Authorization");
-
+            System.out.println("Jwt header: " + header);
             // JWT token 유무 확인
             if (header != null && header.startsWith("Bearer ")){
                 String token = header.substring(7);
