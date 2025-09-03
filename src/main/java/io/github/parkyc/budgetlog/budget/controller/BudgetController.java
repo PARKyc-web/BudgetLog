@@ -1,6 +1,8 @@
 package io.github.parkyc.budgetlog.budget.controller;
 
 
+import io.github.parkyc.budgetlog.budget.dto.BudgetDTO;
+import io.github.parkyc.budgetlog.common.CommonDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/budget")
 public class BudgetController {
 
-    public String test() {
-        return "BudgetLog 가계부 컨트롤러";
+    public CommonDTO.Response<?> getBudgetList(){
+        return CommonDTO.Response.ok("");
     }
 
-    public ResponseEntity<?> test2(){
-        return ResponseEntity.ok("BudgetLog 가계부 컨트롤러 테스트");
+    public CommonDTO.Response<?> createBudget(){
+
+        return CommonDTO.Response.ok("");
     }
+
 
 }

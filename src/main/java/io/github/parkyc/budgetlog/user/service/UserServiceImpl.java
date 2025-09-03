@@ -7,16 +7,10 @@ import io.github.parkyc.budgetlog.token.dto.JwtDTO;
 import io.github.parkyc.budgetlog.user.dto.UserBaseDTO;
 import io.github.parkyc.budgetlog.user.entity.UserBase;
 import io.github.parkyc.budgetlog.user.mapper.UserMapper;
-import io.github.parkyc.budgetlog.user.repository.UserAuthRepository;
 import io.github.parkyc.budgetlog.user.repository.UserBaseRepository;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SecurityException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.SecretKey;
-import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -24,11 +18,10 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     /** Beans **/
-    private final UserAuthRepository userAuthRepository;
     private final UserBaseRepository userBaseRepository;
-
     private final JwtService jwtService;
 
+    /** Mapper **/
     private final UserMapper userMapper;
 
 
@@ -40,8 +33,7 @@ public class UserServiceImpl implements UserService {
         UserBase guest = UserBase.builder()
                 .userId(guestId)
                 .password(guestId)
-                .userName("게스트 계정")
-                .userRole("GUEST")
+                .role("GUEST")
                 .build();
 
         userBaseRepository.saveAndFlush(guest);

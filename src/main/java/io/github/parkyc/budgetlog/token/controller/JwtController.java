@@ -23,6 +23,6 @@ public class JwtController {
 
         Claims claims = tokenService.verifyToken(tokenDTO.getAccessToken());
 
-        return CommonDTO.Response.success(claims);
+        return CommonDTO.Response.ok(claims);
     }
 }

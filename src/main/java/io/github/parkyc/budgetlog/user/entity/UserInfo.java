@@ -7,48 +7,33 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_info")
-@TableGenerator(
-        name="USER_INFO_SEQ_GENERATOR",
-        table="BUDGET_LOG_SEQUENCE",
-        pkColumnName="sequence_name",
-        valueColumnName = "next_val",
-        pkColumnValue = "USER_INFO_SEQUENCE",
-        allocationSize=1 // 한번에 몇개의 Sequence를 증가시킬것인가?, 몇개를 메모리에 가지고 있을것인가?
+@Entity
+@SequenceGenerator(
+        name = "user_info_generator",
+        sequenceName = "SEQ_USER_INFO",
+        allocationSize = 5
 )
 public class UserInfo {
 
     @Id
-    @Column(name = "user_seq")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "USER_INFO_SEQ_GENERATOR")
-    private Long userSeq;
+    @Column(name="user_info_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long userInfoSeq;
 
-    @MapsId
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "tel")
+    private String tel;
+
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_seq")
+    @JoinColumn(name = "user_seq", referencedColumnName = "user_seq")
     private UserBase userBase;
 
-    // 추가적인 정보 ( 선택적인 정보 )
-
-    @CreationTimestamp
-    @Column(name = "created_dt", nullable = false, updatable = false)
-    private LocalDateTime createdDt;
-
-    @UpdateTimestamp
-    @Column(name="updated_dt", nullable = true)
-    private LocalDateTime updatedDt;
-
-    public static UserInfo createFrom(UserBase userBase, String email) {
-        UserInfo userInfo = UserInfo.builder()
-                .userSeq(userBase.getUserSeq())
-                .userBase(userBase)
-                .build();
-        userBase.setUserInfo(userInfo);
-        return userInfo;
-    }
 }

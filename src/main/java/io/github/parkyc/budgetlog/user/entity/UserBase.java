@@ -6,48 +6,34 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
+
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="user_base")
-@TableGenerator(
-        name="USER_AUTH_SEQ_GENERATOR",
-        table="BUDGET_LOG_SEQUENCE",
-        pkColumnName="sequence_name",
-        valueColumnName = "next_val",
-        pkColumnValue = "USER_BASE_SEQUENCE",
-        allocationSize=1 // 한번에 몇개의 Sequence를 증가시킬것인가?, 몇개를 메모리에 가지고 있을것인가?
+@Entity
+@SequenceGenerator(
+        name = "user_seq_generator",
+        sequenceName = "SEQ_USER_BASE",
+        allocationSize = 5
 )
 public class UserBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "USER_AUTH_SEQ_GENERATOR")
-    @Column(name = "user_seq")
+    @Column(name="user_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_generator")
     private Long userSeq;
 
-    @Column(name="user_id", nullable = false, unique = true, length = 50)
+    @Column(name="user_id", nullable = false)
     private String userId;
 
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     private String password;
 
-    @Column(name="user_name", nullable = false, length = 100)
-    private String userName;
+    @Column(name="role")
+    private String role;
 
-    @Column(name="user_role")
-    private String userRole;
-
-//    애초에 인증이 완료된 부분만 이 테이블에 넣으면 되잖아?? >> 근데 만약에 회원가입하다가 중간에 그만두면?? >> 회원가입이 실패한거지
-//    만약에 이메일 인증단계에서 안했어... 그럼? >> 다시 만들어
-//    @Column(name="auth_yn", nullable = false, length = 1)
-//    private String authYn;
-
-    @OneToOne(mappedBy = "userBase", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "userBase", fetch = FetchType.LAZY)
     private UserInfo userInfo;
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
 }

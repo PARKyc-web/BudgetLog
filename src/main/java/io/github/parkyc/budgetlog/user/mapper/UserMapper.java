@@ -12,5 +12,4 @@ public interface UserMapper {
 
     UserBaseDTO toUserBaseDTO(UserBase userBase);
 
-    // Add... MapStruct library
 }

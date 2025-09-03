@@ -18,7 +18,7 @@ public class CommonDTO {
         private final LocalDateTime responseTime = LocalDateTime.now();
 
         // 기본 성공 응답 (200 OK)
-        public static <T> Response<T> success(T data) {
+        public static <T> Response<T> ok(T data) {
             return Response.<T>builder()
                     .status(HttpStatus.OK.value())
                     .message("Success")
@@ -27,7 +27,7 @@ public class CommonDTO {
         }
 
         // 성공 응답 (상태 코드 지정)
-        public static <T> Response<T> success(int status, T data) {
+        public static <T> Response<T> ok(int status, T data) {
             return Response.<T>builder()
                     .status(status)
                     .message("Success")

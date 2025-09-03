@@ -21,13 +21,13 @@ public class UserController {
     public CommonDTO.Response<?> createGuest(){
         GuestUserDTO guest = userService.createGuest();
 
-        return CommonDTO.Response.success(guest);
+        return CommonDTO.Response.ok(guest);
     }
 
     @PostMapping("/login")
     public CommonDTO.Response<?> login(@RequestBody LoginDTO loginDTO){
         JwtDTO token = userService.login(loginDTO);
-        return CommonDTO.Response.success(token);
+        return CommonDTO.Response.ok(token);
     }
 
 }

@@ -1,5 +1,6 @@
-package io.github.parkyc.budgetlog.common;
+package io.github.parkyc.budgetlog.config.response;
 
+import io.github.parkyc.budgetlog.common.CommonDTO;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
