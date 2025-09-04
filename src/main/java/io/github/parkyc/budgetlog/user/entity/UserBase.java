@@ -34,6 +34,10 @@ public class UserBase {
     @Column(name="role")
     private String role;
 
-    @OneToOne(mappedBy = "userBase", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "userBase", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private UserInfo userInfo;
+
+    public void linkUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 }

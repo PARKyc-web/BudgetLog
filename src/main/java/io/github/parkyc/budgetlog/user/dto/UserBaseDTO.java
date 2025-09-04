@@ -17,5 +17,5 @@ public class UserBaseDTO {
 
     private String password;
 
-    private String userRole;
+    private String role;
 }

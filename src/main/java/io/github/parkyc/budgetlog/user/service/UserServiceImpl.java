@@ -6,6 +6,7 @@ import io.github.parkyc.budgetlog.user.dto.LoginDTO;
 import io.github.parkyc.budgetlog.token.dto.JwtDTO;
 import io.github.parkyc.budgetlog.user.dto.UserBaseDTO;
 import io.github.parkyc.budgetlog.user.entity.UserBase;
+import io.github.parkyc.budgetlog.user.entity.UserInfo;
 import io.github.parkyc.budgetlog.user.mapper.UserMapper;
 import io.github.parkyc.budgetlog.user.repository.UserBaseRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +30,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public GuestUserDTO createGuest() {
 
-        String guestId = UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString();
         UserBase guest = UserBase.builder()
-                .userId(guestId)
-                .password(guestId)
-                .role("GUEST")
+                .userId(uuid)
+                .password(uuid)
+                .role("ROLE_GUEST")
                 .build();
+
+        UserInfo info = UserInfo.builder()
+                .userName("게스트계정")
+                .userBase(guest)
+                .build();
+        guest.linkUserInfo(info);
 
         userBaseRepository.saveAndFlush(guest);
 

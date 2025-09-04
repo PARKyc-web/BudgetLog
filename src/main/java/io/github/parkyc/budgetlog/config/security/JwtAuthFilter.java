@@ -4,6 +4,7 @@ import io.github.parkyc.budgetlog.token.dto.JwtStatus;
 import io.github.parkyc.budgetlog.token.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -49,13 +50,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
-        System.out.println("Jwt filter ON");
+        System.out.println(">>> JwtAuthFilter DO FILTER: " + request.getRequestURI());
         JwtStatus isValid = null;
         try {
             // header 정보 가져옴
             String header = request.getHeader("Authorization");
-            System.out.println("Jwt header: " + header);
             // JWT token 유무 확인
             if (header != null && header.startsWith("Bearer ")){
                 String token = header.substring(7);
@@ -64,10 +63,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 if(isValid == JwtStatus.VALID){
                     Claims clm = jwtService.verifyToken(token);
                     String userId = clm.get("userId", String.class);
-                    // String role = clm.get("role", String.class);
+                    String role = clm.get("role", String.class);
 
+                    JwtUserDetails jwtUserDetail = new JwtUserDetails(userId, null, role);
                     Authentication authToken =
-                            new UsernamePasswordAuthenticationToken(userId, null, Collections.emptyList());
+                            new UsernamePasswordAuthenticationToken(jwtUserDetail, null, jwtUserDetail.getAuthorities());
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
