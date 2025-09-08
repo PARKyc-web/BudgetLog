@@ -22,5 +22,5 @@ jwt:
   #token: budget-log-secret-key-2025-05-27
   token: Kdn49s8Jwq0XfP3GmV6qP5ZcL9aMb2qTiR4wU7c2bFE=
   expire:
-    access: 3600000000 # 1 hour
-    refresh: 604800000000 # 7 days
+    access: 1h # 1 hour
+    refresh: 7d # 7 days

@@ -34,7 +34,7 @@ public class JwtServiceImpl implements JwtService {
                 .issuedAt(now)
                 .claim("userId", userBaseDTO.getUserId())
                 .claim("role", userBaseDTO.getRole())
-                .expiration(new Date(now.getTime() + jwtProperties.getExpire().getAccess()))
+                .expiration(new Date(now.getTime() + jwtProperties.getExpire().getAccess().toMillis()))
                 .signWith(jwtProperties.getSecretKey())
                 .compact();
 
@@ -44,7 +44,7 @@ public class JwtServiceImpl implements JwtService {
                 .issuedAt(now)
                 .claim("userId", userBaseDTO.getUserId())
                 .claim("role", userBaseDTO.getRole())
-                .expiration(new Date(now.getTime() + jwtProperties.getExpire().getRefresh()))
+                .expiration(new Date(now.getTime() + jwtProperties.getExpire().getRefresh().toMillis()))
                 .signWith(jwtProperties.getSecretKey())
                 .compact();
 

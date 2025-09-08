@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.Duration;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class JwtProperties {
     @Getter
     @Setter
     public static class Expire {
-        private Long access;
-        private Long refresh;
+        private Duration access;
+        private Duration refresh;
     }
 }
