@@ -65,4 +65,15 @@ public class UserServiceImpl implements UserService {
 
         return jwtService.createToken(dto);
     }
+
+    @Override
+    public UserBaseDTO getUserByUserId(String userId) {
+
+        UserBase base = userBaseRepository.findByUserId(userId);
+        if(base == null){
+            return null;
+        }
+
+        return userMapper.toUserBaseDTO(base); // UserSeq 및 password 포함
+    }
 }

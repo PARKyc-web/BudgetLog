@@ -3,6 +3,7 @@ package io.github.parkyc.budgetlog.user.service;
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
 import io.github.parkyc.budgetlog.token.dto.JwtDTO;
+import io.github.parkyc.budgetlog.user.dto.UserBaseDTO;
 
 public interface UserService {
 
@@ -20,4 +21,13 @@ public interface UserService {
      * @return
      */
     JwtDTO login(LoginDTO loginDTO);
+
+    /**
+     * getUserByUserId
+     * 사용자 이메일을 받아서 정보를 확인 함.
+     * @param userId
+     * @return
+     */
+    UserBaseDTO getUserByUserId(String userId);
+
 }

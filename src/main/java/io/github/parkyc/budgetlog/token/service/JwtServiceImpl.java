@@ -4,6 +4,7 @@ import io.github.parkyc.budgetlog.config.properties.JwtProperties;
 import io.github.parkyc.budgetlog.token.dto.JwtDTO;
 import io.github.parkyc.budgetlog.token.dto.JwtStatus;
 import io.github.parkyc.budgetlog.user.dto.UserBaseDTO;
+import io.github.parkyc.budgetlog.user.service.UserService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SecurityException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,12 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
+    /* Properties Beans */
     private final JwtProperties jwtProperties;
+
+    /* Beans */
+    private final UserService userService;
+
 
     @Override
     public JwtDTO createToken(UserBaseDTO userBaseDTO) {
@@ -105,10 +111,37 @@ public class JwtServiceImpl implements JwtService {
         return claims;
     }
 
-
-
     @Override
     public JwtDTO renewJwtToken(String refreshToken) {
+
+        Claims clm = null;
+        try {
+            clm = Jwts.parser()
+                    .verifyWith(jwtProperties.getSecretKey())
+                    .build()
+                    .parseSignedClaims(refreshToken)
+                    .getPayload();
+
+            String userId = clm.get("userId", String.class);
+            String role = clm.get("role", String.class);
+
+            UserBaseDTO base = userService.getUserByUserId(userId);
+            if(base == null){
+                return null;
+            }
+
+        } catch (SecurityException | MalformedJwtException e){
+            System.out.println("Invalid token");
+        } catch (ExpiredJwtException e){
+            System.out.println("Expired token");
+        } catch (UnsupportedJwtException e){
+            System.out.println("Unsupported token");
+        } catch (IllegalArgumentException e){
+            System.out.println("Invalid Argument token");
+        } catch (Exception e){
+            System.out.println("Unknown Exception");
+        }
+
         return null;
     }
 
