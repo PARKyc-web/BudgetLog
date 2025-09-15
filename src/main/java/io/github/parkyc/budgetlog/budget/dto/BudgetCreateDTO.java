@@ -16,6 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class BudgetCreateDTO {
 
-    private String BudgetName;
+    private String budgetName;
 
+    private String description;
+
+    private String userId;
 }

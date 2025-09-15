@@ -1,14 +1,21 @@
 package io.github.parkyc.budgetlog.budget.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 @Table(name="budget")
 @Entity
@@ -17,6 +24,7 @@ import java.util.List;
         sequenceName="SEQ_BUDGET",
         allocationSize=1
 )
+@EntityListeners(AuditingEntityListener.class)
 public class Budget {
 
     @Id
@@ -26,9 +34,14 @@ public class Budget {
     @Column(name="budget_name")
     private String budgetName;
 
+    @Column(name="description", nullable = true)
+    private String description;
+
+    @CreatedDate
     @Column(name="create_date")
     private LocalDateTime createDate;
 
+    @LastModifiedDate
     @Column(name="update_date")
     private LocalDateTime updateDate;
 

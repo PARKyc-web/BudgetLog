@@ -30,11 +30,4 @@ public interface JwtService {
      */
     Claims verifyToken(String token);
 
-    /**
-     * JWT Token 재발급 받기 위한 메서드
-     * @param refreshToken
-     * @return
-     */
-    JwtDTO renewJwtToken(String refreshToken);
-
 }

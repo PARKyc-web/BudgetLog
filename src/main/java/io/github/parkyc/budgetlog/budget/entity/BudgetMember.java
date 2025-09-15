@@ -2,8 +2,11 @@ package io.github.parkyc.budgetlog.budget.entity;
 
 import io.github.parkyc.budgetlog.user.entity.UserInfo;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 @Table(name="budget_member")
 @Entity
