@@ -17,8 +17,6 @@ import java.util.List;
 public class BudgetCreateDTO {
 
     private String budgetName;
-
     private String description;
-
     private String userId;
 }

@@ -1,5 +1,6 @@
 package io.github.parkyc.budgetlog.budget.entity;
 
+import io.github.parkyc.budgetlog.user.entity.UserBase;
 import io.github.parkyc.budgetlog.user.entity.UserInfo;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,7 +28,7 @@ public class BudgetMember {
 
     @ManyToOne
     @JoinColumn(name = "user_seq", nullable = false)
-    private UserInfo member;
+    private UserBase member;
 
     // 멤버권한 (Owner, Member, Viewer)
     @Column(name = "role", nullable = false)

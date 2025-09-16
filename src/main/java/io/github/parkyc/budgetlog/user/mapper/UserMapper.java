@@ -8,7 +8,11 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
+    /** Guest User Method **/
     GuestUserDTO toGuestUserDTO(UserBase userBase);
+
+    /** User Base Method **/
+    UserBase toBaseEntity(UserBaseDTO userBaseDTO);
 
     UserBaseDTO toUserBaseDTO(UserBase userBase);
 
