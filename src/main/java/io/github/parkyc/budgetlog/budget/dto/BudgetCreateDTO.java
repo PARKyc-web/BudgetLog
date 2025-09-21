@@ -1,8 +1,6 @@
 package io.github.parkyc.budgetlog.budget.dto;
 
-import io.github.parkyc.budgetlog.budget.entity.Budget;
 import io.github.parkyc.budgetlog.budget.entity.BudgetMember;
-import io.github.parkyc.budgetlog.user.entity.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BudgetCreateDTO {
+    /* 가계부 생성을 위한 정보를 받는 DTO */
 
+    /* 가계부 명 */
     private String budgetName;
+
+    /* 가계부에 대한 설명 */
     private String description;
-    private String userId;
+
+    /* 가계부 멤버 목록 */
+    private List<BudgetMember> budgetMembers;
 }

@@ -1,5 +1,6 @@
 package io.github.parkyc.budgetlog.user.service;
 
+import io.github.parkyc.budgetlog.common.enums.UserRole;
 import io.github.parkyc.budgetlog.token.service.JwtService;
 import io.github.parkyc.budgetlog.user.dto.GuestUserDTO;
 import io.github.parkyc.budgetlog.user.dto.LoginDTO;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
         UserBase guest = UserBase.builder()
                 .userId(uuid)
                 .password(uuid)
-                .role("ROLE_GUEST")
+                .role(UserRole.ROLE_GUEST)
                 .build();
 
         UserInfo info = UserInfo.builder()

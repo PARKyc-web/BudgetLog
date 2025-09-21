@@ -7,10 +7,10 @@ import io.github.parkyc.budgetlog.budget.service.BudgetService;
 import io.github.parkyc.budgetlog.common.CommonDTO;
 import io.github.parkyc.budgetlog.config.security.JwtUserDetails;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,16 +22,15 @@ public class BudgetController {
     @GetMapping("/list")
     public CommonDTO.Response<?> getBudgetList(@AuthenticationPrincipal JwtUserDetails jwtUserDetails) {
 
+        List<BudgetDTO> budgetList = budgetService.findAllBudgets(jwtUserDetails.getUsername());
 
-
-        return null;
+        return CommonDTO.Response.ok(budgetList);
     }
 
     @PostMapping("/create")
     public CommonDTO.Response<?> createBudget(@AuthenticationPrincipal JwtUserDetails jwtUserDetails
             , @RequestBody BudgetCreateDTO budgetCreateDTO) {
 
-        budgetCreateDTO.setUserId(jwtUserDetails.getUsername());
         BudgetDTO budget = budgetService.createBudget(jwtUserDetails, budgetCreateDTO);
 
         return CommonDTO.Response.ok(budget);

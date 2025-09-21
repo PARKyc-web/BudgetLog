@@ -1,5 +1,6 @@
 package io.github.parkyc.budgetlog.config.security;
 
+import io.github.parkyc.budgetlog.common.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -24,9 +23,9 @@ public class SecurityConfig {
 
     @Bean
     public RoleHierarchy roleHierarchy() {
-        return RoleHierarchyImpl.withDefaultRolePrefix()
-                .role("ADMIN").implies("USER")
-                .role("USER").implies("GUEST")
+        return RoleHierarchyImpl.withRolePrefix("")
+                .role(UserRole.ROLE_ADMIN.toString()).implies(UserRole.ROLE_USER.toString())
+                .role(UserRole.ROLE_USER.toString()).implies(UserRole.ROLE_GUEST.toString())
                 .build();
     }
 
