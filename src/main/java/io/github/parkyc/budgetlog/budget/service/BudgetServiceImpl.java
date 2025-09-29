@@ -38,6 +38,8 @@ public class BudgetServiceImpl implements BudgetService {
         Budget budget = Budget.from(budgetCreateDTO);
 
         /* 가계부 소유자 멤버 생성 및 등록 */
+        // codex 추천 : userService에서 현재 DTO를 반환하는게 아니라 userBase를 리턴해서 사용해야한다.
+        // 현재는 영속성이 없음
         UserBaseDTO baseDTO = userService.getUserByUserId(jwtUserDetails.getUsername());
         UserBase base = userMapper.toBaseEntity(baseDTO);
 

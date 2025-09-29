@@ -36,4 +36,10 @@ public class BudgetController {
         return CommonDTO.Response.ok(budget);
     }
 
+    @PostMapping("/fill-in")
+    public CommonDTO.Response<?> fillBudget(@AuthenticationPrincipal JwtUserDetails jwtUserDetails){
+
+        return CommonDTO.Response.ok("ok");
+    }
+
 }
