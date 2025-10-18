@@ -2,6 +2,7 @@ package io.github.parkyc.budgetlog.budget.service;
 
 import io.github.parkyc.budgetlog.budget.dto.BudgetCreateDTO;
 import io.github.parkyc.budgetlog.budget.dto.BudgetDTO;
+import io.github.parkyc.budgetlog.budget.dto.BudgetFillDTO;
 import io.github.parkyc.budgetlog.budget.entity.Budget;
 import io.github.parkyc.budgetlog.budget.entity.BudgetMember;
 import io.github.parkyc.budgetlog.budget.mapper.BudgetMapper;
@@ -66,4 +67,18 @@ public class BudgetServiceImpl implements BudgetService {
         return budgetDTOs;
     }
 
+    @Override
+    public boolean fillInData(JwtUserDetails jwtUserDetails, BudgetFillDTO budgetFillDTO) {
+        return false;
+    }
+
+    @Override
+    public boolean fillOutData(JwtUserDetails jwtUserDetails, BudgetFillDTO budgetFillDTO) {
+        return false;
+    }
+
+    @Override
+    public boolean modifyFillData(JwtUserDetails jwtUserDetails, BudgetFillDTO budgetFillDTO) {
+        return false;
+    }
 }

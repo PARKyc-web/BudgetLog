@@ -6,20 +6,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BudgetDTO {
-    /* 가계부 상세 정보를 확인하는 DTO */
+public class BudgetDataDTO {
 
     private Long budgetSeq;
-    private String budgetName;
-    private String description;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
-    private List<BudgetMemberDTO>  budgetMembers;
+    private String budgetName;
+
+    private String userId;
+
+    private String userName;
+
+    private Long amount;
+
+    private Long count;
+
+    private Long total;
+
+    /* 등록 및 수정일 */
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

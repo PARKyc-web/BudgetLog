@@ -3,6 +3,7 @@ package io.github.parkyc.budgetlog.budget.controller;
 
 import io.github.parkyc.budgetlog.budget.dto.BudgetCreateDTO;
 import io.github.parkyc.budgetlog.budget.dto.BudgetDTO;
+import io.github.parkyc.budgetlog.budget.dto.BudgetFillDTO;
 import io.github.parkyc.budgetlog.budget.service.BudgetService;
 import io.github.parkyc.budgetlog.common.CommonDTO;
 import io.github.parkyc.budgetlog.config.security.JwtUserDetails;
@@ -36,8 +37,14 @@ public class BudgetController {
         return CommonDTO.Response.ok(budget);
     }
 
-    @PostMapping("/fill-in")
-    public CommonDTO.Response<?> fillBudget(@AuthenticationPrincipal JwtUserDetails jwtUserDetails){
+    @PostMapping("/trunc")
+    public CommonDTO.Response<?> truncateBudget(@AuthenticationPrincipal JwtUserDetails jwtUserDetails) {
+
+        return CommonDTO.Response.ok("ok");
+    }
+
+    @PostMapping("/delete")
+    public CommonDTO.Response<?> deleteBudget(@AuthenticationPrincipal JwtUserDetails jwtUserDetails) {
 
         return CommonDTO.Response.ok("ok");
     }

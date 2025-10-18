@@ -41,11 +41,11 @@ public class BudgetMember {
 
     @CreatedDate
     @Column(name="create_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @LastModifiedDate
     @Column(name="update_date")
-    private LocalDateTime updatedDate;
+    private LocalDateTime updateDate;
 
     public static BudgetMember create(Budget budget, UserBase member, BudgetMemberRole role){
         if(budget == null){

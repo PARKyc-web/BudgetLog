@@ -17,6 +17,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        highlight_sql: true
 
 jwt:
   #token: budget-log-secret-key-2025-05-27

@@ -30,11 +30,16 @@ dependencies {
     implementation("org.mapstruct:mapstruct:1.6.3")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 
+    // OpenFeign QueryDSL
+    implementation "io.github.openfeign.querydsl:querydsl-jpa:7.0"
+    annotationProcessor "io.github.openfeign.querydsl:querydsl-apt:7.0:jakarta"
+    // annotationProcessor "io.github.openfeign.querydsl:querydsl-apt:7.0"
+    // jakarta를 안 붗이면 QEntity가 생성되지 않음... 왜...?
 
     // JJWT 최신 버전으로 업데이트
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 
 	// DB
 	// application-maria 사용시 사용
@@ -50,7 +55,6 @@ dependencies {
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-    runtimeOnly 'org.postgresql:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 }

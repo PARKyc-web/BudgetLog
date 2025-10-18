@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface BudgetMemberRepository extends JpaRepository<BudgetMember, Long> {
-
+public interface BudgetMemberRepository extends JpaRepository<BudgetMember, Long>, BudgetMemberQuery {
     List<BudgetMember> findAllByMember(UserBase member);
 }
